@@ -8,23 +8,25 @@ import java.util.function.Consumer;
 
 public class ConsumerExample {
 
+    //for code optimization or reusability of code
+    //fetching all students
+    static List<Student> studentList = StudentDataBase.getAllStudents();
+
+    //creating Consumer object of student
+    static Consumer<Student> c2 = (student) -> System.out.println(student);
+    static Consumer<Student> c3 = (student) -> System.out.println(student.getName());
+    static Consumer<Student> c4 = (student) -> System.out.println(student.getActivities());
+
+
+
     /**
      * q2. write code to print all students using consumer interface and lambda expression
      */
     public static void printAllStudents(){
 
-        //fetching all students
-        List<Student> studentList = StudentDataBase.getAllStudents();
-
-        //creating Consumer object of student
-        Consumer<Student> c2 = (student) -> {
-          System.out.println(student);
-        };
-
         //printing the data
         studentList.forEach(c2);
         System.out.println("***************************************");
-
     }
 
 
@@ -32,14 +34,6 @@ public class ConsumerExample {
      * q3. write code to print all student's name using consumer interface and lambda expression
      */
     public static void printName(){
-
-        //fetching all students
-        List<Student> studentList = StudentDataBase.getAllStudents();
-
-        //creating Consumer object of student
-        Consumer<Student> c3 = (student) -> {
-            System.out.println(student.getName());
-        };
 
         //printing the data
         studentList.forEach(c3);
@@ -52,17 +46,8 @@ public class ConsumerExample {
      */
     public static void printNameAndActivities(){
 
-        //fetching all students
-        List<Student> studentList = StudentDataBase.getAllStudents();
-
-        //creating Consumer object of student
-        Consumer<Student> c4 = (student) -> {
-            System.out.print(student.getName() + " : ");
-            System.out.println(student.getActivities());
-        };
-
         //printing the data
-        studentList.forEach(c4);
+        studentList.forEach(c3.andThen(c4)); //consumer chaining
         System.out.println("***************************************");
 
     }
@@ -74,19 +59,12 @@ public class ConsumerExample {
      */
     public static void printNameAndActivitiesWithCondition(){
 
-        //fetching all students
-        List<Student> studentList = StudentDataBase.getAllStudents();
-
-        //creating Consumer object of student
-        Consumer<Student> c4 = (student) -> {
-            if(student.getGradeLevel() >= 3 && student.getGpa() >= 3.9) {
-                System.out.print(student.getName() + " : ");
-                System.out.println(student.getActivities());
-            }
-        };
-
         //printing the data
-        studentList.forEach(c4);
+        studentList.forEach(student -> {
+            if(student.getGradeLevel() >= 3 && student.getGpa() >= 3.9){
+                c3.andThen(c4).accept(student);
+            }
+        });
         System.out.println("***************************************");
 
     }
