@@ -6,6 +6,7 @@ import java.util.List;
 public class Student {
     private String name;
     private int gradeLevel;
+    private int notebooks;
     private double gpa;
     private String gender;
     List<String> activities = new ArrayList<>();
@@ -16,6 +17,31 @@ public class Student {
         this.gpa = gpa;
         this.gender = gender;
         this.activities = activities;
+    }
+
+    public Student(String name, int gradeLevel, int notebooks, double gpa, String gender, List<String> activities) {
+        this.name = name;
+        this.gradeLevel = gradeLevel;
+        this.notebooks = notebooks;
+        this.gpa = gpa;
+        this.gender = gender;
+        this.activities = activities;
+    }
+
+    public Student() {
+
+    }
+
+    public int getNotebooks() {
+        return notebooks;
+    }
+
+    public void setNotebooks(int notebooks) {
+        this.notebooks = notebooks;
+    }
+
+    public Student(String s) {
+        this.name = s;
     }
 
     public String getGender() {
@@ -54,6 +80,10 @@ public class Student {
 
     public List<String> getActivities() {
         return activities;
+    }
+
+    public void printActivities(){
+        System.out.println(getActivities());
     }
 
     public void setActivities(List<String> activities) {
