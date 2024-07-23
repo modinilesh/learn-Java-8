@@ -23,11 +23,16 @@ public class StreamReduceExample {
 
     //find student with Highest gpa
     public static Optional<Student> getStudentWithHighestGpa(){
-        return StudentDataBase.getAllStudents().stream()
+        /*return StudentDataBase.getAllStudents().stream()
                 .reduce((student1, student2) -> {
                     if(student1.getGpa() > student2.getGpa()) return student1;
                     else return student2;
-                });
+                });*/
+
+        //using ternary operator
+        return StudentDataBase.getAllStudents().stream()
+                .reduce((s1, s2) -> (s1.getGpa() > s2.getGpa()) ? s1 : s2);
+
     }
 
     public static void main(String[] args) {
