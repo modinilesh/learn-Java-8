@@ -1,5 +1,8 @@
 package streams;
 
+import data.Student;
+import data.StudentDataBase;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +21,22 @@ public class StreamReduceExample {
                 .reduce((a, b) -> a * b);
     }
 
+    //find student with Highest gpa
+    public static Optional<Student> getStudentWithHighestGpa(){
+        return StudentDataBase.getAllStudents().stream()
+                .reduce((student1, student2) -> {
+                    if(student1.getGpa() > student2.getGpa()) return student1;
+                    else return student2;
+                });
+    }
+
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         System.out.println("Product is : " + getProduct(numbers));
         System.out.println("Product is : " + getProductWithoutInitialValue(numbers).get());
+
+        System.out.println("Student with Highest GPA is : " + getStudentWithHighestGpa().get());
 
     }
 }
