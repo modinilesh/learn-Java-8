@@ -21,6 +21,14 @@ public class StreamComparatorExample {
         return StudentDataBase.getAllStudents().stream()
                 .sorted(Comparator.comparing(Student::getName))
                 .collect(Collectors.toList());
+
+        //for descending order
+        /**
+         * return StudentDataBase.getAllStudents().stream()
+         *                 .sorted(Comparator.comparing(Student::getName).reversed())
+         *                 .collect(Collectors.toList());
+         */
+
     }
 
     //Sort all students based on their gpa
